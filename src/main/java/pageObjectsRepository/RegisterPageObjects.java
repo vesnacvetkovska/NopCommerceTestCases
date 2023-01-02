@@ -53,6 +53,15 @@ public class RegisterPageObjects extends Base {
 	@FindBy(name = "register-button")
 	WebElement registerBtn;
 	
+	public
+	@FindBy (xpath = "//*[@id=\"ConfirmPassword-error\"]")
+	WebElement confirmPassError;
+	public 
+	@FindBy (xpath ="//*[@id=\"LastName-error\"]")
+	WebElement lasNameErrorMsg;
+	
+	
+	
 	public RegisterPageObjects() {
 		PageFactory.initElements(driver, this);
 	

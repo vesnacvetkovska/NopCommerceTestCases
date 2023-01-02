@@ -55,6 +55,13 @@ public class ShoppingCartObjects extends Base {
 	@FindBy (id = "checkout")
 	WebElement checkoutBtn;
 	
+	public
+	@FindBy (xpath = "(//*[@class=\"cart-total-right\"])[1]")
+	WebElement subTotalSum1;
+	public 
+	@FindBy (xpath = "//*[@class=\"remove-btn\"]")
+	WebElement removeBtn;
+
 	
 	public ShoppingCartObjects() {
 	

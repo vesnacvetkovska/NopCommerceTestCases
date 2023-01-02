@@ -33,6 +33,8 @@ public class HomePageObjects extends Base {
 	public
 	WebElement computerTopMenu;
 	
+	public @FindBy (xpath = "(//*[@href=\"/software\"])[1]")
+	WebElement subMenuSoftware;
 	@FindBy(xpath = "//*[@class=\"top-menu notmobile\"]//child::a[@href=\"/electronics\"]")
 	WebElement electronicsTopMenu;
 	
@@ -79,7 +81,15 @@ public class HomePageObjects extends Base {
 	@FindBy (xpath = "(//*[@href=\"/cart\"])[1]")
 	WebElement shoppingCartLinkPopUP;
 	
-	
+    public 
+    @FindBy  (xpath = "//h2[@class=\\\"product-title\\\"]")
+    WebElement productTitle;
+    public 
+    @FindBy (xpath = "//*[@class=\"products-container\"]")
+    WebElement productContainer;
+	public 
+	@FindBy (xpath = "//div[@class=\"page search-page\"]")
+	WebElement searchPage;
 	
 	public HomePageObjects () {
 		PageFactory.initElements(driver, this);

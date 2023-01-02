@@ -100,6 +100,14 @@ public class CheckoutPageObjects extends Base {
 	@FindBy (xpath = "//*[@type=\"checkbox\"]") 
 	WebElement shippToTheSameAddress;
 	
+	public 
+	@FindBy (xpath = "//*[@class=\"button-1 checkout-as-guest-button\"]")
+	WebElement checkOutAsGuest;
+	
+	public 
+	@FindBy (xpath = "//*[@id=\"paymentmethod_0\"]")
+	WebElement moneyPayment;
+	
 	public CheckoutPageObjects() {
 	
 		PageFactory.initElements(driver, this);
@@ -123,9 +131,9 @@ public class CheckoutPageObjects extends Base {
 	
 	public void billingAddressForRegistered ()
 	{
-		//firtsName.sendKeys(td.firstName);
-		//lastName.sendKeys(td.lastName);
-		//email.sendKeys(td.validEmail);
+		firtsName.sendKeys(td.firstName);
+		lastName.sendKeys(td.lastName);
+		email.sendKeys(td.validEmail);
 		cm.selectSize(country, 15);
 		city.sendKeys(td.city);
 		address1.sendKeys(td.address1);
@@ -144,7 +152,7 @@ public class CheckoutPageObjects extends Base {
 	
 		//Shipping method	
 			public void shippingmethod () {
-	new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@value=\"Next Day Air___Shipping.FixedByWeightByTotal\"]"))).click();
+	new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@value=\"Next Day Air___Shipping.FixedByWeightByTotal\"]"))).click();
 		conShippingMethod.click();};
 	
 	
@@ -170,6 +178,13 @@ public class CheckoutPageObjects extends Base {
 		
 	}
 	
+	public void paymentMethodMoneyOrder () {
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.id("paymentmethod_0"))).click();
+		moneyPayment.click();
+		continuePaymentmethod.click();
+		new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.id("payment-info-buttons-container")));
+		continueBtnPayInfo.click();
+	}
 	//confirm button
 	public void confirmMethod() {
 	cm.scrollToTheEle(confirmBtn);

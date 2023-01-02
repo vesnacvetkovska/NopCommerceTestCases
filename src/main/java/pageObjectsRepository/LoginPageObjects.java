@@ -25,16 +25,28 @@ public class LoginPageObjects extends Base {
 	@FindBy(xpath = "//*[@class=\"button-1 login-button\"]")
 	WebElement loginBtn;
 	
+	public
+	@FindBy (xpath ="//div[@class=\"message-error validation-summary-errors\"]")
+	WebElement errorMsgLogin;
+	
+	public 
+	@FindBy (xpath = "//*[@id=\"Email-error\"]")
+	WebElement errorMsgEmail;
+	
+	public @FindBy (xpath = "//*[@href=\"/logout\"]")
+	WebElement logOutBtn;
+	
 	
 	public LoginPageObjects () {
 		PageFactory.initElements(driver, this);
 	}
 		
-		public void logInUserModulCheckBox (String username, String passwrod) {
-			emailField.sendKeys(username);
+		public void logInUserModulCheckBox (String email, String passwrod) {
+			emailField.sendKeys(email);
 			passwordField.sendKeys(passwrod);
 			remembermeCheckBox.click();
 			loginBtn.click();
+			
 		}
 		
 		

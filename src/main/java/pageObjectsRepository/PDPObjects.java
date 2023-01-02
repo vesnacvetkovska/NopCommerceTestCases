@@ -1,6 +1,4 @@
 package pageObjectsRepository;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -11,10 +9,9 @@ import testData.TestData;
 
      public class PDPObjects extends Base {
 
-    CommonMethods cm = new CommonMethods();
     
 	HomePageObjects hpo = new HomePageObjects();
-	ShoppingCartObjects shco;
+	ShoppingCartObjects shco = new ShoppingCartObjects();
 
 	
 	TestData td = new TestData();
@@ -31,7 +28,7 @@ import testData.TestData;
 	WebElement enterQuantity;
 	
 	public
-	@FindBy (xpath = "//*[@class=\"value\"]")
+	@FindBy (xpath = "(//span[@class=\"value\"])[2]")
 	WebElement  skuField;
 	public
 	@FindBy (xpath = "//*[@id=\"add-to-cart-button-30\"]")
@@ -77,31 +74,64 @@ import testData.TestData;
 	WebElement addToCartNiconD5500DSLRBlack;
 	
 	public @FindBy (xpath = "//*[@class=\"product-price\"]")
-	WebElement productPriceItem1;
+	WebElement productPriceItem;
 	
-	public @FindBy (xpath = "//*[@class=\"product-price\"]")
-	WebElement productPriceItem2;
-
-	public
-	String s2;
+	public @FindBy (xpath ="//*[@id=\"rental_start_date_40\"]")
+	WebElement startDateForRent;
 	
-
+	public @FindBy (xpath = "//*[@class=\"ui-datepicker-month\"]")
+	WebElement monthInDatePicker;
+	public @FindBy (xpath = "//*[@class=\"ui-datepicker-year\"]")
+	WebElement yearInDatePicker;
+	public @FindBy (xpath = "//*[@title=\"Next\"]")
+	WebElement nextBtnInDatePicker;
+	public @FindBy (xpath = "//*[@class=\"ui-state-default\"]")
+	WebElement dayInDatePicker;
+	
+	public @FindBy (xpath ="//*[@id=\"rental_end_date_40\"]")
+	WebElement endDateForRent;
+	public @FindBy (xpath= "//*[@id=\"ui-datepicker-div\"]")
+	WebElement calendar;
+	public @FindBy (xpath = "//*[@class=\"short-description\"]")	
+	WebElement shortDescription;
+	
+	public @FindBy (xpath = "//*[@href=\"/first-prize-pies\"]")	
+	WebElement firstPrizePies;
+	
+	public @FindBy (xpath = "//*[contains(text(),'Add your review')]")	
+	WebElement addYourReview;
+	public @FindBy (xpath = "//*[@href=\"/leica-t-mirrorless-digital-camera\"]")
+	WebElement leicaTMirrorlessDigitalCamera;
+	
+	public @FindBy (xpath = "//input[@class=\"review-title\"]")
+	WebElement reviewTitel;
+	
+	public @FindBy (xpath = "//textarea[@class=\"review-text\"]")
+	WebElement reviewtext;
+	
+	public @FindBy (xpath = "//input [@value=\"4\"]")
+	WebElement btnRating4;
+	public @FindBy (xpath = "(//*[@type=\"submit\"])[2]")
+	WebElement submitReview;
+	
+	public @FindBy (xpath = "//*[@class=\"button-2 download-sample-button\"]")
+	WebElement downloadSample;
+	
 	public  PDPObjects() {
 		
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void rentAnItem () {
-		
-		stratDayForRent.sendKeys("12/25/2022");
-		endDayForRent.sendKeys("01/25/2023");
-		new WebDriverWait(driver, 3);
-		
-		s2 = cm.stringReturnMethod(productPriceItem2);
-		rentBtn.click();}
-		
 	
 		
+	// get the price from PDP
+		public int getThePriceFromPDP (WebElement elem) {
+			String price = elem.getText();
+			String price2 = price.replace("$", "");
+			int number = Integer.parseInt(price2);
+			return number;
+			
+		}
 
 	
 }

@@ -1,6 +1,11 @@
 package pageObjectsRepository;
 
+
+
+import java.util.List;
+
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,12 +15,16 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import base.Base;
+import testData.TestData;
+
 
 public class CommonMethods extends Base {
 
-
+ PDPObjects pdpo = new PDPObjects();
+ TestData td = new TestData();
+ ShoppingCartObjects shco = new ShoppingCartObjects();
 	
-	public Object gettextSkuFromElementsInShoppingCart;
+	
 
 	public  CommonMethods() {
 		
@@ -45,9 +54,14 @@ public class CommonMethods extends Base {
 	
 	//wait method
 	
-	public void waitMethod (int sec, WebElement elem) {
+	public void waitMethodVisibility (int sec, WebElement elem) {
 		WebDriverWait wait = new WebDriverWait(driver,sec);
 		wait.until(ExpectedConditions.visibilityOf( elem )) ;
+	}
+	
+	public void waitMethodInvisibility (int sec, WebElement elem1) {
+		WebDriverWait wait = new WebDriverWait(driver,sec);
+		wait.until(ExpectedConditions.invisibilityOf( elem1 )) ;
 	}
 //random email
 			public  String generateMail () {
@@ -73,14 +87,7 @@ public class CommonMethods extends Base {
 		      drop.selectByIndex(index);
 			}
 		
-		//not finished yet
-		/*public void getSkuValue (WebElement elem) {
-			 String el = elem.getAttribute("value");
 		
-			 System.out.println("This is the SKU " + el);
-			 
-			 
-		}*/
 		
 		public String getSkuValue (WebElement elem) {
 			 String el = elem.getText();
@@ -99,5 +106,74 @@ public class CommonMethods extends Base {
 			   return elem.getText();
 			}
 		
+		// get the price from pdp
+		public String getThePriceFromPDP(WebElement elem) {
+			String s = pdpo.productPriceItem.getText();
+			String snew = s.replace("$", "");
+			double snew1 = Double.parseDouble(snew);
+			return snew;
 			
-}
+		}
+		
+		// convert string to double
+		public  double stringToDouble (WebElement elem) {
+			String s= elem.getText();
+			String snew = s.replace("$", "");
+			double doub = Double.parseDouble(snew);
+			return doub;
+			
+		}
+
+		// datePicker
+		public void datePicker (String dateForRent, WebElement dataField, WebElement nextBtn ) {
+		String dateForRent2 = dateForRent;
+		String emonth2 = dateForRent2.split("-")[1];
+		String eyear2 = dateForRent2.split("-")[2];
+		String eday2 = dateForRent2.split("-")[0];
+			
+			//new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class=\"datepicker hasDatepicker\"])[1]"))); 
+			
+			dataField.click();
+			
+			 String cmonth2 = pdpo.monthInDatePicker.getText().trim();
+			 String cyear2 =pdpo.yearInDatePicker.getText().trim();
+			
+			  
+			  //month and year picker
+			 while (!(cmonth2.equals(emonth2)) || !(cyear2.equals(eyear2))) {
+				
+				// new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ui-datepicker-div\"]"))); 
+				
+				nextBtn.click();
+							 
+				 cmonth2 =pdpo.monthInDatePicker.getText().trim();
+				 cyear2 =pdpo.yearInDatePicker.getText().trim();
+				 
+				 System.out.println(eyear2);
+				 System.out.println(emonth2);
+				 
+						 
+			 }
+			
+			 //day picker
+			 List<WebElement> dates2 = driver.findElements(By.xpath("//*[@class=\"ui-state-default\"]"));
+			 
+			 for (WebElement e1:dates2) {
+				 
+				 if (e1.getText().trim().equals(eday2)) {
+					 e1.click();
+					 break;
+				 }
+		
+	
+			 }
+		}
+			 public void printLn (String s) {
+				 System.out.println(s);
+				 
+			 }
+			 public void print(String s) {
+					System.out.println(s);
+				}
+
+		}

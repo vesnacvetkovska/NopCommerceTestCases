@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testCasesHomework6.EndToEndAsGuest">
+      <class name="test_Cases_NopCommerce_Demo_WebPage.EndToEndAsRegisterdUser">
         <methods>
-          <include name="ednToEndScenarioAsGuest"/>
           <include name="start"/>
+          <include name="quit"/>
+          <include name="endToEndScenarioAsRegist"/>
         </methods>
-      </class> <!-- testCasesHomework6.EndToEndAsGuest -->
+      </class> <!-- test_Cases_NopCommerce_Demo_WebPage.EndToEndAsRegisterdUser -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
